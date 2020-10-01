@@ -14,10 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 // Closure
 Route::get('porfil', function(){
     return 'ini adalah profil siswa';
@@ -38,3 +34,7 @@ Route::get('tescontroller', 'TesController@index');
 
 // Resource
 Route::resource('siswa', 'SiswaController');
+
+// blade 
+Route::get('/', 'LandingController@index');
+Route::get('/about', 'LandingController@about');
