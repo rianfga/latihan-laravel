@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Siswa;
 
 class SiswaController extends Controller
 {
@@ -13,7 +14,7 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        //
+        return view('data');
     }
 
     /**
@@ -34,7 +35,15 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = Siswa::create($request->all());
+        if ($data) {
+           return redirect()->back()->with("success", "<script>alert('sukses')</script>"); ;
+        }else{
+            return redirect()->back()->with("succes", "<script>alert('sukses')</script>");
+        }
+
+
+
     }
 
     /**

@@ -38,3 +38,6 @@ Route::resource('siswa', 'SiswaController');
 // blade 
 Route::get('/', 'LandingController@index');
 Route::get('/about', 'LandingController@about');
+
+Route::get('/data', 'SiswaController@index')->name('data');
+Route::post('/data', 'SiswaController@store');
