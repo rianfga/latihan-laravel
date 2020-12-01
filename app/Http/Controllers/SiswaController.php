@@ -39,7 +39,7 @@ class SiswaController extends Controller
         if ($data) {
            return redirect()->back()->with("success", "<script>alert('sukses')</script>"); ;
         }else{
-            return redirect()->back()->with("succes", "<script>alert('sukses')</script>");
+            return redirect()->back()->with("gagal", "<script>alert('gagal')</script>");
         }
 
 
