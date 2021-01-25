@@ -38,7 +38,7 @@ class SiswaController extends Controller
     {
         $data = Siswa::create($request->all());
         if ($data) {
-           return redirect(route('siswa.index'))->with("success", "<script>alert('sukses')</script>"); ;
+           return redirect(route('siswa.index'));
         }else{
             return redirect()->back()->with("gagal", "<script>alert('gagal')</script>");
         }
@@ -86,7 +86,7 @@ class SiswaController extends Controller
         $siswa->save();
 
         if($siswa) return redirect(route('siswa.index'));
-        return redirect()->back()->with('gagal');
+        return redirect()->back()->with('gagal', "<script>alert('gagal update!')</script>");
     }
 
     /**
@@ -97,6 +97,12 @@ class SiswaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $siswa = Siswa::find($id);
+
+        if($siswa->delete()){
+            return redirect(route('siswa.index'));
+        }else{
+            return redirect()->back()->with('gagal', "<script>alert('gagal hapus!')</script>");
+        }
     }
 }

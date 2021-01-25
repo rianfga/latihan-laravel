@@ -3,10 +3,8 @@
 @section('judul', 'Tambah Data Siswa')
 
 @section('isi')
-        @if (\Session::has('success'))
-            {!! \Session::get('success') !!}
-        @elseif(\Session::has('success'))
-            {!! \Session::get('success') !!}
+        @if (\Session::has('gagal'))
+            {!! \Session::get('gagal') !!}
         @endif            
         <div class="container">
             <div class="row justify-content-center">

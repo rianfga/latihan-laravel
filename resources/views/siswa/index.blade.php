@@ -8,6 +8,9 @@
         <div class="row justify-content-center mt-5">
             <div class="col-md-6">
                 <a href="{{ route('insert') }}" class="btn btn-primary">Tambah Data</a>
+                @if (\Session::has('gagal'))
+                    {!! \Session::get('gagal') !!}
+                @endif                        
                 <table class="table text-center">
                     <thead>
                         <tr>
@@ -27,7 +30,11 @@
                             <td>{{ $data->telepon }}</td>
                             <td>{{ $data->alamat }}</td>
                             <td>
-                                <a href="{{ route('siswa.edit', $data->id) }}" class="btn btn-primary btn-xs">Edit</a> | <a href="{{ route('siswa.destroy', $data->id) }}" class="btn btn-danger btn-xs">Hapus</a>
+                                <a href="{{ route('siswa.edit', $data->id) }}" class="btn btn-primary btn-xs">Edit</a> | <form action="{{ route('siswa.destroy', $data->id) }}" method="post" onsubmit="return confirm('apakah anda yakin ingin menghapus?');">
+                                    @csrf
+                                    @method('delete')
+                                    <button class="btn btn-danger btn-xs" type="submit">Hapus</button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
@@ -36,5 +43,4 @@
             </div>
         </div>
     </div>
-
 @endsection

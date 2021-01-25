@@ -6,6 +6,9 @@
 <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-10 mt-5">
+                    @if (\Session::has('gagal'))
+                        {!! \Session::get('gagal') !!}
+                    @endif                        
                     <form action="{{ route('siswa.update', $editSiswa->id) }}" method="post">
                         @method('PUT')
                         @csrf
