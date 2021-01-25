@@ -14,7 +14,8 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        return view('data');
+        $siswa = Siswa::all();
+        return view('siswa/index', compact('siswa'));
     }
 
     /**
@@ -24,7 +25,7 @@ class SiswaController extends Controller
      */
     public function create()
     {
-        //
+        return view('siswa/tambah');
     }
 
     /**
@@ -37,7 +38,7 @@ class SiswaController extends Controller
     {
         $data = Siswa::create($request->all());
         if ($data) {
-           return redirect()->back()->with("success", "<script>alert('sukses')</script>"); ;
+           return redirect(route('siswa.index'))->with("success", "<script>alert('sukses')</script>"); ;
         }else{
             return redirect()->back()->with("gagal", "<script>alert('gagal')</script>");
         }
@@ -65,7 +66,8 @@ class SiswaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $editSiswa = Siswa::find($id);
+        return view('siswa/edit', compact('editSiswa'));
     }
 
     /**
@@ -77,7 +79,14 @@ class SiswaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $siswa = Siswa::find($id);
+        $siswa->nama = $request->name;
+        $siswa->telepon = $request->telepon;
+        $siswa->alamat = $request->alamat;
+        $siswa->save();
+
+        if($siswa) return redirect(route('siswa.index'));
+        return redirect()->back()->with('gagal');
     }
 
     /**

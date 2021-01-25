@@ -39,5 +39,5 @@ Route::resource('siswa', 'SiswaController');
 Route::get('/', 'LandingController@index');
 Route::get('/about', 'LandingController@about');
 
-Route::get('/data', 'SiswaController@index')->name('data');
-Route::post('/data', 'SiswaController@store');
+Route::get('/insert', 'SiswaController@create')->name('insert');
+Route::post('/insert', 'SiswaController@store');
