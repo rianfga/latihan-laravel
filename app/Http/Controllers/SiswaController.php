@@ -7,7 +7,11 @@ use App\Siswa;
 
 class SiswaController extends Controller
 {
-    /**
+    private $message = [
+        'required' => 'kolom :attribute harus diisi!',
+        'digits' => 'kolom :attribute diisi minimal :digits digit.'
+    ];
+    /** 
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -36,6 +40,12 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nama' => 'required',
+            'telepon' => 'required|digits:11',
+            'alamat' => 'required'
+        ], $this->message);
+
         $data = Siswa::create($request->all());
         if ($data) {
            return redirect(route('siswa.index'));
@@ -79,6 +89,12 @@ class SiswaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required',
+            'telepon' => 'required|digits:11',
+            'alamat' => 'required'
+        ], $this->message);
+
         $siswa = Siswa::find($id);
         $siswa->nama = $request->name;
         $siswa->telepon = $request->telepon;
