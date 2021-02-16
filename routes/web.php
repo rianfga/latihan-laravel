@@ -32,12 +32,22 @@ Route::get('profil/{id}', function($id){
 // Controller
 Route::get('tescontroller', 'TesController@index');
 
+// login authentication
+Route::get('siswa/login', 'SiswaController@login');
+Route::post('siswa/login', 'SiswaController@auth');
+
 // Resource
-Route::resource('siswa', 'SiswaController');
+Route::group(['middleware' => 'auth'] , function (){
+    Route::resource('siswa', 'SiswaController');
+    
+    // insert data
+    Route::get('/insert', 'SiswaController@create')->name('insert');
+    Route::post('/insert', 'SiswaController@store');
+    // logout
+    Route::get('logout', 'SiswaController@logout');
+});
 
 // blade 
 Route::get('/', 'LandingController@index');
 Route::get('/about', 'LandingController@about');
 
-Route::get('/insert', 'SiswaController@create')->name('insert');
-Route::post('/insert', 'SiswaController@store');

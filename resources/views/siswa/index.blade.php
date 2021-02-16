@@ -8,6 +8,7 @@
         <div class="row justify-content-center mt-5">
             <div class="col-md-6">
                 <a href="{{ route('insert') }}" class="btn btn-primary">Tambah Data</a>
+                <a href="/logout" class="btn btn-danger float-right">Log out</a>
                 @if (\Session::has('gagal'))
                     {!! \Session::get('gagal') !!}
                 @endif                        

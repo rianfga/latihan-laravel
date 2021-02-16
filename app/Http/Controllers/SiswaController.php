@@ -52,9 +52,6 @@ class SiswaController extends Controller
         }else{
             return redirect()->back()->with("gagal", "<script>alert('gagal')</script>");
         }
-
-
-
     }
 
     /**
@@ -120,5 +117,26 @@ class SiswaController extends Controller
         }else{
             return redirect()->back()->with('gagal', "<script>alert('gagal hapus!')</script>");
         }
+    }
+
+    public function login(){
+        return view('siswa/login');
+    }
+
+    public function auth(Request $request){
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required',
+        ], [ 'email' => 'Field :attribute harus diisi' , 'password' => 'Field :attribute harus diisi']);
+
+        if(auth()->attempt($request->only(['email','password']))){
+            return redirect('/siswa');
+        }       
+        return redirect()->back()->with('gagal', "<script>alert('login gagal')</script>");
+    }
+
+    public function logout(){
+        auth()->logout();
+        return redirect('/siswa/login');
     }
 }
